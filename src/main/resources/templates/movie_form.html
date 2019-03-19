@@ -1,10 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-
+<form action="/movie/add" method="post" th:object="${movieForm}"><div>
+    <table bgcolor="silver">
+        <tr>
+            <td>Podaj tytół filmu:</td><td><input type="text" th:field="*{name}"></td>
+        </tr>
+        <tr>
+            <td>Podaj autora filmu:</td><td><input type="text" th:field="*{autor}"></td>
+        </tr>
+        <tr>
+            <td>Podaj rok wydania filmu:</td><td><input type="number" th:field="*{releaseYear}"></td>
+        </tr>
+        <tr>
+            <td>Wybierz typ macroelementu:</td>
+            <td>
+                <input type="radio" th:field="*{movieType}" value="ACTION">Akcja
+                <input type="radio" th:field="*{movieType}" value="COMEDY">Komedia
+                <input type="radio" th:field="*{movieType}" value="ROMANCE">Romans
+                <input type="radio" th:field="*{movieType}" value="DRAMA">Dramat
+                <input type="radio" th:field="*{movieType}" value="DOCUMENTARY">Dokumentalny
+                <input type="radio" th:field="*{movieType}" value="SCIFI">Sci-Fi
+                <input type="radio" th:field="*{movieType}" value="FANTASY">Fantastyka
+            </td>
+        </tr>
+        <tr>
+            <td>Podaj krótki opis:</td><td><input type="text" th:field="*{shortDescription}"></td>
+        </tr>
+        <tr>
+            <td>Podaj długi opis:</td><td><input type="text" th:field="*{longDescription}"></td>
+        </tr>
+        <tr>
+            <br>
+            <td colspan="3" align="center"><br>
+                <input type="submit" value="Dodaj">
+                <input type="reset" value="Wyczyść">
+                <a href="/"> Powróć do listy filmów</a>
+            </td>
+        </tr>
+    </table>
+</div></form>
 </body>
 </html>

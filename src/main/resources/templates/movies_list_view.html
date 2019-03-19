@@ -7,10 +7,9 @@
 <body>
     <ul>
         <li th:each="movie : ${movieList}">
-            <span th:text="${movie.getName()}"></span>
+            <a th:href="'/movie/description/' + ${movie.getId()}"><span th:text="${movie.getName()}"></span></a>
             <span th:text="${movie.getShortDescription()}"></span>
         </li>
     </ul>
-
 </body>
 </html>
