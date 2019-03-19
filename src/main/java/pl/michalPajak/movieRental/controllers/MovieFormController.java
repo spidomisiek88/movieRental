@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.michalPajak.movieRental.models.MovieForm;
-import pl.michalPajak.movieRental.services.MovieListService;
+import pl.michalPajak.movieRental.models.services.MovieListService;
 
 import javax.validation.Valid;
 
@@ -32,8 +32,7 @@ public class MovieFormController {
             // TODO: 2019-03-19
         }
 
-        movieListService.setMovieForm(movieForm);
-        movieListService.addNewMovie();
+        movieListService.addNewMovie(movieForm);
 
         return "redirect:/movie/add";
     }

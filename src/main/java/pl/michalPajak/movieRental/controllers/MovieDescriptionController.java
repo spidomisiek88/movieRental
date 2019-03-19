@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import pl.michalPajak.movieRental.services.MovieDescriptionService;
+import pl.michalPajak.movieRental.models.services.MovieDescriptionService;
 
 @Controller
 public class MovieDescriptionController {

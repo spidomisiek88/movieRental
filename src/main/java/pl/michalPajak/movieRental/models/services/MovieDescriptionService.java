@@ -1,4 +1,4 @@
-package pl.michalPajak.movieRental.services;
+package pl.michalPajak.movieRental.models.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package pl.michalPajak.movieRental.services;
+package pl.michalPajak.movieRental.models.services;
 
 import com.google.common.collect.Lists;
 import lombok.Data;
@@ -17,14 +17,13 @@ public class MovieListService {
 
     @Autowired
     private MovieRentalRepository movieRentalRepository;
-    private MovieForm movieForm;
     private MovieEntity movie;
 
     public List<MovieEntity> getAllMovies() {
         return Lists.newArrayList(movieRentalRepository.findAll());
     }
 
-    public void addNewMovie() {
+    public void addNewMovie(MovieForm movieForm) {
         movie = new MovieEntity();
         movie.setName(movieForm.getName());
         movie.setAutor(movieForm.getAutor());
