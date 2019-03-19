@@ -6,9 +6,9 @@
 </head>
 <body>
     <ul>
-        <li th:each="movie:${movieList}">
-            <span th:text="${movie}"></span>
-            <span th:text="${movie}"></span>
+        <li th:each="movie : ${movieList}">
+            <span th:text="${movie.getName()}"></span>
+            <span th:text="${movie.getShortDescription()}"></span>
         </li>
     </ul>
 
