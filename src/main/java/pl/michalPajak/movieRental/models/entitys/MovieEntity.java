@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "movie")
 @Data
-public class MovieEntyty {
+public class MovieEntity {
 
     @Id
     @GeneratedValue
