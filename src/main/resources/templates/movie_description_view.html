@@ -9,7 +9,10 @@
     <table bgcolor="silver">
         <tr>
             <td>Autor filmu:</td>
-            <td><span th:text="${movie.getAutor()}"></span></td>
+            <td>
+                <span th:text="${movie.getAutor().getName()}"></span>
+                <span th:text="${movie.getAutor().getSurname()}"></span>
+            </td>
         </tr>
         <tr>
             <td>Rok wydania filmu:</td><td><span th:text="${movie.getReleaseYear()}"></span></td>

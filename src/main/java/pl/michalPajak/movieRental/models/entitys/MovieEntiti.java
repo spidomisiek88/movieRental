@@ -8,13 +8,15 @@ import javax.persistence.*;
 @Entity
 @Table(name = "movie")
 @Data
-public class MovieEntity {
+public class MovieEntiti {
 
     @Id
     @GeneratedValue
     private int id;
     private String name;
-    private String autor;
+    @ManyToOne
+    @JoinColumn(name = "autor_id")
+    private AutorEntiti autor;
     @Column(name = "release_year")
     private int releaseYear;
     @Enumerated(EnumType.STRING)

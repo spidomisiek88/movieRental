@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.michalPajak.movieRental.models.MovieForm;
 import pl.michalPajak.movieRental.models.MovieRentalRepository;
-import pl.michalPajak.movieRental.models.entitys.MovieEntity;
+import pl.michalPajak.movieRental.models.entitys.AutorEntiti;
+import pl.michalPajak.movieRental.models.entitys.MovieEntiti;
 import pl.michalPajak.movieRental.models.enums.MovieType;
 
 import java.util.List;
@@ -17,16 +18,19 @@ public class MovieListService {
 
     @Autowired
     private MovieRentalRepository movieRentalRepository;
-    private MovieEntity movie;
+    private MovieEntiti movie;
 
-    public List<MovieEntity> getAllMovies() {
+    public List<MovieEntiti> getAllMovies() {
         return Lists.newArrayList(movieRentalRepository.findAll());
     }
 
     public void addNewMovie(MovieForm movieForm) {
-        movie = new MovieEntity();
+        AutorEntiti autorEntiti = new AutorEntiti();
+        autorEntiti.setId(1);//TODO
+
+        movie = new MovieEntiti();
         movie.setName(movieForm.getName());
-        movie.setAutor(movieForm.getAutor());
+        movie.setAutor(autorEntiti);
         movie.setReleaseYear(movieForm.getReleaseYear());
         movie.setMovieType(MovieType.valueOf(movieForm.getMovieType()));
         movie.setShortDescription(movieForm.getShortDescription());
