@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import pl.michalPajak.movieRental.models.MovieRentalRepository;
 import pl.michalPajak.movieRental.models.entitys.MovieEntity;
 
+import java.util.Optional;
+
 @Service
 public class MovieDescriptionService {
 
@@ -12,6 +14,9 @@ public class MovieDescriptionService {
     MovieRentalRepository movieRentalRepository;
 
     public MovieEntity getMovieById(int movieId){
-        return movieRentalRepository.findMovieById(movieId);
+        Optional<MovieEntity> optionalMovieEntity = movieRentalRepository.findById(movieId);
+        if (optionalMovieEntity.isPresent())
+            return optionalMovieEntity.get();
+        throw new IllegalStateException();
     }
 }
