@@ -15,18 +15,23 @@ import javax.validation.Valid;
 @Controller
 public class MovieFormController {
 
+    private static final String URL_MOVIE_FORM = "/movie/add";
+    private static final String MOVIE_FORM_TEMPLATE_NAME = "movie_form";
+    private static final String REDIRECT_MOVIE_FORM_TEMPLATE ="redirect:/movie/add";
+    private static final String MODEL_ATTRIB_NAME_MOVIE_FORM ="movieForm";
+
     @Autowired
     MovieListService movieListService;
 
-    @GetMapping("/movie/add")
+    @GetMapping(URL_MOVIE_FORM)
     public String showAddMovieForm(Model model){
 
-        model.addAttribute("movieForm", new MovieForm());
+        model.addAttribute(MODEL_ATTRIB_NAME_MOVIE_FORM, new MovieForm());
 
-        return "movie_form";
+        return MOVIE_FORM_TEMPLATE_NAME;
     }
 
-    @PostMapping("/movie/add")
+    @PostMapping(URL_MOVIE_FORM)
     public String addMovieToList(@ModelAttribute @Valid MovieForm movieForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             // TODO: 2019-03-19
@@ -34,6 +39,6 @@ public class MovieFormController {
 
         movieListService.addNewMovie(movieForm);
 
-        return "redirect:/movie/add";
+        return REDIRECT_MOVIE_FORM_TEMPLATE;
     }
 }

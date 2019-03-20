@@ -9,14 +9,18 @@ import pl.michalPajak.movieRental.models.services.MovieListService;
 @Controller
 public class MovieListController {
 
+    private static final String URL_MOVIE_LIST = "/";
+    private static final String MOVIE_LIST_TEMPLATE_NAME = "movies_list_view";
+    private static final String MODEL_ATTRIB_NAME_MOVIE_LIST ="movieList";
+
     @Autowired
     MovieListService movieListService;
 
-    @GetMapping("/")
+    @GetMapping(URL_MOVIE_LIST)
     public String showMovieListView(Model model){
 
-        model.addAttribute("movieList", movieListService.getAllMovies());
+        model.addAttribute(MODEL_ATTRIB_NAME_MOVIE_LIST, movieListService.getAllMovies());
 
-        return "movies_list_view";
+        return MOVIE_LIST_TEMPLATE_NAME;
     }
 }

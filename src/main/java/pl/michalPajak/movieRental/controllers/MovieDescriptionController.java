@@ -10,14 +10,19 @@ import pl.michalPajak.movieRental.models.services.MovieDescriptionService;
 @Controller
 public class MovieDescriptionController {
 
-    @Autowired
+    private static final String URL_MOVIE_DECRIPTION = "/movie/description/{movieId}";
+    private static final String MOVIE_DECRIPTION_TEMPLATE_NAME = "movie_description_view";
+    private static final String PATH_VAR_NAME_MOVIE_ID ="movieId";
+    private static final String MODEL_ATTRIB_NAME_MOVIE_ID ="movie";
+
+            @Autowired
     MovieDescriptionService movieDescriptionService;
 
-    @GetMapping("/movie/description/{movieId}")
-    public String showMovieDescriptionView(@PathVariable("movieId") int movieId, Model model) {
+    @GetMapping(URL_MOVIE_DECRIPTION)
+    public String showMovieDescriptionView(@PathVariable(PATH_VAR_NAME_MOVIE_ID) int movieId, Model model) {
 
-        model.addAttribute("movie", movieDescriptionService.getMovieById(movieId));
+        model.addAttribute(MODEL_ATTRIB_NAME_MOVIE_ID, movieDescriptionService.getMovieById(movieId));
 
-        return "movie_description_view";
+        return MOVIE_DECRIPTION_TEMPLATE_NAME;
     }
 }
