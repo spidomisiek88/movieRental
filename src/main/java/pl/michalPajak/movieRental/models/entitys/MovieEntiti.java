@@ -14,7 +14,7 @@ public class MovieEntiti {
     @Id
     @GeneratedValue
     private int id;
-    private String name;
+    private String title;
     @ManyToOne
     @JoinColumn(name = "autor_id")
     private AutorEntiti autor;

@@ -37,8 +37,13 @@ public class MovieListService {
     }
 
     public boolean isExistMovie(String name) {
-        return movieRentalRepository.isExistMovieByName(name).booleanValue();
+        //return movieRentalRepository.isExistMovieByName(name);
+        return movieRentalRepository.existsByTitle(name);
     }
+
+//public boolean isExistMovie(String name) {
+//    return movieRentalRepository.existsByTitle(name);
+//}
 
     public MovieResponse addNewMovie(MovieForm movieForm) {
         AutorEntiti newAutorEntiti = autorListService.getAutorByName(movieForm.getAutor());
@@ -46,11 +51,11 @@ public class MovieListService {
         if (newAutorEntiti == null)
             return MovieResponse.AUTOR_NOT_EXIST;
 
-        if (!isExistMovie(movieForm.getName()))
+        if (isExistMovie(movieForm.getName()))
             return MovieResponse.TITLE_ALREDY_EXIST;
 
         movie = new MovieEntiti();
-        movie.setName(movieForm.getName());
+        movie.setTitle(movieForm.getName());
         movie.setAutor(newAutorEntiti);
         movie.setReleaseYear(movieForm.getReleaseYear());
         movie.setMovieType(MovieType.valueOf(movieForm.getMovieType()));
