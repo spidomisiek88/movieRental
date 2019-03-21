@@ -5,6 +5,7 @@ import pl.michalPajak.movieRental.models.enums.MovieType;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "autor")
@@ -17,4 +18,7 @@ public class AutorEntiti {
     private String name;
     private String surname;
     private LocalDate birthday;
+
+    @OneToMany(mappedBy = "autor")
+    List<MovieEntiti> movies;
 }

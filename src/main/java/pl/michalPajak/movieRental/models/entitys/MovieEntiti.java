@@ -4,6 +4,7 @@ import lombok.Data;
 import pl.michalPajak.movieRental.models.enums.MovieType;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "movie")
@@ -26,4 +27,7 @@ public class MovieEntiti {
     private String shortDescription;
     @Column(name = "long_description")
     private String longDescription;
+
+    @OneToMany(mappedBy = "movie")
+    List<CommentEntiti> commentList;
 }

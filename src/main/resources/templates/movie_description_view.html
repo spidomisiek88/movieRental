@@ -24,6 +24,22 @@
             <td>Opis filmu:</td><td><span th:text="${movie.getLongDescription()}"></span></td>
         </tr>
         <tr>
+            <form th:action="'/movie/comment/add/' + ${movie.getId()}" method="post"><div>
+                <table bgcolor="silver">
+                    <tr>
+                        <td>Skomentuj film:</td><td><input type="text" name="comment"></td>
+                    </tr>
+                    <tr>
+                        <br>
+                        <td colspan="3" align="center"><br>
+                            <input type="submit" value="Dodaj">
+                            <input type="reset" value="Wyczyść">
+                        </td>
+                    </tr>
+                </table>
+            </div></form>
+        </tr>
+        <tr>
             <br>
             <td colspan="3" align="center"><br>
                 <a href="/"> Powróć do listy filmów</a>

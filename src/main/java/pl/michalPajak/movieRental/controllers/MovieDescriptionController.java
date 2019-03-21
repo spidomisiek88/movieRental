@@ -15,7 +15,7 @@ public class MovieDescriptionController {
     private static final String PATH_VAR_NAME_MOVIE_ID ="movieId";
     private static final String MODEL_ATTRIB_NAME_MOVIE_ID ="movie";
 
-            @Autowired
+    @Autowired
     MovieDescriptionService movieDescriptionService;
 
     @GetMapping(URL_MOVIE_DECRIPTION)

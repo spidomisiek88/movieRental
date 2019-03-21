@@ -9,7 +9,9 @@
         <li th:each="movie : ${movieList}">
             <a th:href="'/movie/description/' + ${movie.getId()}"><span th:text="${movie.getName()}"></span></a>
             <span th:text="${movie.getShortDescription()}"></span>
+            <a th:href="'/movie/comment/' + ${movie.getId()}">Komentarze</a>
         </li>
     </ul>
+    <a href="/autor/list/">Przejdź do listy Autorów</a>
 </body>
 </html>

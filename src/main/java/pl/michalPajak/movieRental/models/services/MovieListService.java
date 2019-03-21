@@ -1,6 +1,5 @@
 package pl.michalPajak.movieRental.models.services;
 
-import com.google.common.collect.Lists;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,32 +9,56 @@ import pl.michalPajak.movieRental.models.entitys.AutorEntiti;
 import pl.michalPajak.movieRental.models.entitys.MovieEntiti;
 import pl.michalPajak.movieRental.models.enums.MovieType;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 @Data
 public class MovieListService {
 
+    public enum MovieResponse {
+        CREATED, AUTOR_NOT_EXIST, TITLE_ALREDY_EXIST;
+    }
+
     @Autowired
     private MovieRentalRepository movieRentalRepository;
     private MovieEntiti movie;
+    @Autowired
+    private AutorListService autorListService;
 
-    public List<MovieEntiti> getAllMovies() {
-        return Lists.newArrayList(movieRentalRepository.findAll());
+    public Iterable<MovieEntiti> getAllMovies() {
+        return movieRentalRepository.findAll();
     }
 
-    public void addNewMovie(MovieForm movieForm) {
-        AutorEntiti autorEntiti = new AutorEntiti();
-        autorEntiti.setId(1);//TODO
+    public MovieEntiti getMovieById(int movieId) {
+        Optional<MovieEntiti> optionalMovieEntiti = movieRentalRepository.findById(movieId);
+        if (optionalMovieEntiti.isPresent())
+            return optionalMovieEntiti.get();
+        throw new IllegalStateException();
+    }
+
+    public boolean isExistMovie(String name) {
+        return movieRentalRepository.isExistMovieByName(name).booleanValue();
+    }
+
+    public MovieResponse addNewMovie(MovieForm movieForm) {
+        AutorEntiti newAutorEntiti = autorListService.getAutorByName(movieForm.getAutor());
+
+        if (newAutorEntiti == null)
+            return MovieResponse.AUTOR_NOT_EXIST;
+
+        if (!isExistMovie(movieForm.getName()))
+            return MovieResponse.TITLE_ALREDY_EXIST;
 
         movie = new MovieEntiti();
         movie.setName(movieForm.getName());
-        movie.setAutor(autorEntiti);
+        movie.setAutor(newAutorEntiti);
         movie.setReleaseYear(movieForm.getReleaseYear());
         movie.setMovieType(MovieType.valueOf(movieForm.getMovieType()));
         movie.setShortDescription(movieForm.getShortDescription());
         movie.setLongDescription(movieForm.getLongDescription());
 
         movieRentalRepository.save(movie);
+
+        return MovieResponse.CREATED;
     }
 }

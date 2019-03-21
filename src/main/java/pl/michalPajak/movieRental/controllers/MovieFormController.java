@@ -37,7 +37,11 @@ public class MovieFormController {
             // TODO: 2019-03-19
         }
 
-        movieListService.addNewMovie(movieForm);
+        MovieListService.MovieResponse movieResponse = movieListService.addNewMovie(movieForm);
+        if (movieResponse != MovieListService.MovieResponse.CREATED) {
+            model.addAttribute("movieResponse", movieResponse);
+            return MOVIE_FORM_TEMPLATE_NAME;
+        }
 
         return REDIRECT_MOVIE_FORM_TEMPLATE;
     }
