@@ -1,4 +1,4 @@
-package pl.michalPajak.movieRental.models;
+package pl.michalPajak.movieRental.models.repositoris;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

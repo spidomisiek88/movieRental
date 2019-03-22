@@ -1,4 +1,4 @@
-package pl.michalPajak.movieRental.models;
+package pl.michalPajak.movieRental.models.forms;
 
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;

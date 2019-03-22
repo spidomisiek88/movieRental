@@ -1,4 +1,4 @@
-package pl.michalPajak.movieRental.models.entitys;
+package pl.michalPajak.movieRental.models.entitis;
 
 import lombok.Data;
 import pl.michalPajak.movieRental.models.enums.MovieType;
@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Table(name = "movie")
 @Data
-public class MovieEntiti {
+public class MovieEntity {
 
     @Id
     @GeneratedValue
@@ -17,7 +17,7 @@ public class MovieEntiti {
     private String title;
     @ManyToOne
     @JoinColumn(name = "autor_id")
-    private AutorEntiti autor;
+    private AutorEntity autor;
     @Column(name = "release_year")
     private int releaseYear;
     @Enumerated(EnumType.STRING)
@@ -29,5 +29,5 @@ public class MovieEntiti {
     private String longDescription;
 
     @OneToMany(mappedBy = "movie")
-    List<CommentEntiti> commentList;
+    List<CommentEntity> commentList;
 }

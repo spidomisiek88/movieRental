@@ -1,7 +1,6 @@
-package pl.michalPajak.movieRental.models.entitys;
+package pl.michalPajak.movieRental.models.entitis;
 
 import lombok.Data;
-import pl.michalPajak.movieRental.models.enums.MovieType;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -10,7 +9,7 @@ import java.util.List;
 @Entity
 @Table(name = "autor")
 @Data
-public class AutorEntiti {
+public class AutorEntity {
 
     @Id
     @GeneratedValue
@@ -20,5 +19,5 @@ public class AutorEntiti {
     private LocalDate birthday;
 
     @OneToMany(mappedBy = "autor")
-    List<MovieEntiti> movies;
+    List<MovieEntity> movies;
 }

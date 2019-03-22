@@ -11,6 +11,8 @@ HELP.md
 .springBeans
 .sts4-cache
 .properties
+.floo
+.flooignore
 
 ### IntelliJ IDEA ###
 .idea

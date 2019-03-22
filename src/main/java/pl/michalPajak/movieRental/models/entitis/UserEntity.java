@@ -1,14 +1,14 @@
-package pl.michalPajak.movieRental.models.entitys;
+package pl.michalPajak.movieRental.models.entitis;
 
 import lombok.Data;
-import pl.michalPajak.movieRental.models.enums.MovieType;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
 @Data
-public class User {
+public class UserEntity {
 
     @Id
     @GeneratedValue
@@ -18,4 +18,6 @@ public class User {
     private String password;
     private String email;
 
+    @OneToMany(mappedBy = "user")
+    List<CommentEntity> commentList;
 }
