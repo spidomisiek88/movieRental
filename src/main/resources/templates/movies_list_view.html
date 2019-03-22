@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<h1 th:text="'Jesteś zalogowany? : ' + ${userSession.isLogin()}"></h1>
     <ul>
         <li th:each="movie : ${movieList}">
             <a th:href="'/movie/description/' + ${movie.getId()}"><span th:text="${movie.getTitle()}"></span></a>

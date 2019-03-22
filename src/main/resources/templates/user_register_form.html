@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
 </head>
 <body>
-$END$
+<form action="/user/register" method="post" th:object="${userForm}"><div>
+    <table bgcolor="silver">
+        <tr>
+            <td>Podaj login:</td><td><input type="text" th:field="*{userName}"></td>
+        </tr>
+        <tr>
+            <td>Podaj hasło:</td><td><input type="password" th:field="*{password}"></td>
+        </tr>
+        <tr>
+            <td>Podaj email:</td><td><input type="text" th:field="*{email}"></td>
+        </tr>
+        <tr>
+            <br>
+            <td colspan="3" align="center"><br>
+                <input type="submit" value="Rejestruj">
+                <input type="reset" value="Wyczyść">
+                <a href="/"> Powróć do listy filmów</a>
+            </td>
+        </tr>
+    </table>
+</div></form>
+
 </body>
 </html>
