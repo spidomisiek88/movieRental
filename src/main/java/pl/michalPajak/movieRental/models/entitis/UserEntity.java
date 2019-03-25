@@ -17,7 +17,13 @@ public class UserEntity {
     private String userName;
     private String password;
     private String email;
+    @Column(name = "is_admin")
+    private int admin;
 
     @OneToMany(mappedBy = "user")
     List<CommentEntity> commentList;
+
+    public boolean isAdmin() {
+        return admin > 0 ? true : false;
+    }
 }

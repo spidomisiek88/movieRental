@@ -11,6 +11,11 @@
             <a th:href="'/movie/description/' + ${movie.getId()}"><span th:text="${movie.getTitle()}"></span></a>
             <span th:text="${movie.getShortDescription()}"></span>
             <a th:href="'/movie/comment/' + ${movie.getId()}">Komentarze</a>
+            <a th:href="'/movie/vote/up/' + ${movie.getId()}">Łapka w górę</a>
+            <span th:text="${movie.getMovieRating().getVoteUp()}"></span>
+            <a th:href="'/movie/vote/down/' + ${movie.getId()}">Łapka w dół</a>
+            <span th:text="${movie.getMovieRating().getVoteDown()}"></span>
+
         </li>
     </ul>
     <a href="/autor/list/">Przejdź do listy Autorów</a>

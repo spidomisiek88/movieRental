@@ -29,5 +29,9 @@ public class MovieEntity {
     private String longDescription;
 
     @OneToMany(mappedBy = "movie")
+    @OrderBy("dateComment DESC")
     List<CommentEntity> commentList;
+
+    @OneToOne(mappedBy = "movie")
+    MovieRatingEntity movieRating;
 }

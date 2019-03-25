@@ -12,4 +12,5 @@ public class UserSession {
 
     private int userId;
     private boolean isLogin;
+    private boolean isAdmin;
 }

@@ -26,13 +26,10 @@ public class UserService {
         if (optionalUserEntity.isPresent()) {
             userSession.setLogin(true);
             userSession.setUserId(optionalUserEntity.get().getId());
+            userSession.setAdmin(optionalUserEntity.get().isAdmin());
             return true;
         }
         return false;
-    }
-
-    public boolean isUserNameTaken(UserForm userForm) {
-        return userRepository.isUserNameTaken(userForm.getUserName());
     }
 
     public boolean register(UserForm userForm) {

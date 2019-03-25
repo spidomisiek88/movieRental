@@ -9,6 +9,7 @@
     <li th:each="comment : ${commentList}">
         <span th:text="${comment.getDateComment()}"></span>
         <span th:text="${comment.getCommentContent()}"></span>
+        <span th:text="${comment.getUser().getUserName()}"></span>
     </li>
 </ul>
 <a href="/"> Powróć do listy filmów</a>

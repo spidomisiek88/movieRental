@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import pl.michalPajak.movieRental.models.forms.LoginForm;
 import pl.michalPajak.movieRental.models.forms.UserForm;
 import pl.michalPajak.movieRental.models.services.UserService;
+import pl.michalPajak.movieRental.models.services.UserSession;
 
 import javax.validation.Valid;
 
@@ -57,8 +58,10 @@ public class AuthorizationController {
 
     @PostMapping(URL_REGISTER_FORM)
     public String register(@ModelAttribute UserForm userForm, Model model){
-        if (userService.isUserNameTaken(userForm)) {
+        if (userService.register(userForm)) {
 
+            userService.login(new LoginForm(userForm.getUserName(), userForm.getPassword()));
+            return REDIRECT_MOVIE_LIST;
         }
 
         return REDIRECT_LOGIN_FORM;

@@ -17,7 +17,6 @@ public class MovieListController {
 
     @Autowired
     MovieListService movieListService;
-
     @Autowired
     UserSession userSession;
 
