@@ -2,7 +2,10 @@ package pl.michalPajak.movieRental.models.services;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.michalPajak.movieRental.models.entitis.UserEntity;
 import pl.michalPajak.movieRental.models.forms.LoginForm;
 import pl.michalPajak.movieRental.models.forms.UserForm;
@@ -21,9 +24,10 @@ public class UserService {
     UserSession userSession;
 
     public boolean login(LoginForm loginForm){
-        Optional<UserEntity> optionalUserEntity = userRepository.findUserByLoginAndPassword(loginForm.getUserName(),
-                loginForm.getPassword());
-        if (optionalUserEntity.isPresent()) {
+//        Optional<UserEntity> optionalUserEntity = userRepository.findUserByLoginAndPassword(loginForm.getUserName(),
+//                loginForm.getPassword());
+        Optional<UserEntity> optionalUserEntity = userRepository.findUserByLogin(loginForm.getUserName());
+        if (optionalUserEntity.isPresent() && getBCrypt().matches(loginForm.getPassword(), optionalUserEntity.get().getPassword())) {
             userSession.setLogin(true);
             userSession.setUserId(optionalUserEntity.get().getId());
             userSession.setAdmin(optionalUserEntity.get().isAdmin());
@@ -38,10 +42,34 @@ public class UserService {
 
         UserEntity userEntity = new UserEntity();
         userEntity.setUserName(userForm.getUserName());
-        userEntity.setPassword(userForm.getPassword());
+        userEntity.setPassword(getBCrypt().encode(userForm.getPassword()));
         userEntity.setEmail(userForm.getEmail());
 
         userRepository.save(userEntity);
         return true;
+    }
+
+    public Iterable<UserEntity> getAll() {
+        return userRepository.findAll();
+    }
+
+    public Optional<UserEntity> getUserById(int userId) {
+        return userRepository.findUserById(userId);
+    }
+
+    @Transactional
+    public boolean deleteUserById(int userId) {
+        Optional<UserEntity> optionalUserEntity = getUserById(userId);
+        if (optionalUserEntity.isPresent()) {
+            userRepository.softDeleteUserById(userId);
+            return getUserById(userId).get().isDelete();
+        }
+
+        return false;
+    }
+
+    @Bean
+    public BCryptPasswordEncoder getBCrypt() {
+        return new BCryptPasswordEncoder();
     }
 }
